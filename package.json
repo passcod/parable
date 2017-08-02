@@ -1,0 +1,35 @@
+{
+  "name": "parable",
+  "version": "1.0.0",
+  "description": "Service management tool for Cogitare",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "test": "standard && tap --100 'test/*.test.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/storily/parable.git"
+  },
+  "author": "Félix Saparelli <felix@passcod.name> (https://passcod.name)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/storily/parable/issues"
+  },
+  "homepage": "https://github.com/storily/parable#readme",
+  "devDependencies": {
+    "standard": "^10.0.2",
+    "tap": "^10.7.1"
+  },
+  "dependencies": {
+    "dbus": "^1.0.0",
+    "is-connected-to-systemd-journal": "^1.0.0",
+    "nano": "^6.4.0",
+    "nginx-conf": "^1.3.0",
+    "pino": "^4.7.1",
+    "service-systemd": "^3.1.4",
+    "simple-git": "^1.75.0",
+    "systemd-journald": "^1.3.0",
+    "thenify-all": "^1.6.0"
+  }
+}

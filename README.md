@@ -12,7 +12,7 @@ You describe one or more deployments using documents in a Couch database:
   "phase": "production",
   "repo": {
     "url": "git@github.com:storily/via-appia.git",
-    "rev": "v1.0.0"
+    "ref": "v1.0.0"
   },
   "env": {
     "hoodie_data": "$PERSISTENT/hoodie",

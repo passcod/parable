@@ -4,6 +4,7 @@ const { DeployFail } = require('./lib/errors')
 const { exit } = require('./lib/exits')
 const log = require('./lib/logger')
 const { promisify } = require('util')
+const systemd = require('./lib/systemd')
 
 log.debug('Loading .env')
 require('dotenv').config()
@@ -13,7 +14,10 @@ log.info(`Starting parable ${version}`)
 
 log.debug('Starting main()')
 main()
-  .then(() => log.info('End of story, goodnight!'))
+  .then(() => {
+    log.info('End of story, goodnight!')
+    exit(0)
+  })
   .catch((err) => {
     log.fatal('Received rejection/exception from main()')
     log.fatal(err && err.stack || err)
@@ -22,6 +26,7 @@ main()
 
 async function main () {
   const { db } = await DB.connect()
+  await systemd.init()
 
   log.debug('Fetching all configs')
   const { rows, total_rows } = await promisify(db.list)({ include_docs: true })
@@ -31,7 +36,7 @@ async function main () {
   for (const deploy of deploys) {
     try {
       await deploy.load()
-      await deploy.applyGit()
+      await deploy.apply()
     } catch (e) {
       if (e instanceof DeployFail) {
         log.error(e.message)
